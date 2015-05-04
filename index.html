@@ -7,16 +7,35 @@
 
 <script>
 
+var testCase = { 
+		x: 1, 
+		y: 3, 
+		name: "foo"
+	};
+var testCase2 = { 
+		id: 0
+	};
+
 
 	var CommandCreator = function(){
 		var commands = ["find", "findOne", "orderBy", "limit"];
 
 		for (var i = 0; i < commands.length; i++) {
-			
-		};
+			this[commands[i]] = function(name){
+
+				return function(){
+					return {
+						name: name,
+						args: arguments
+					};
+				};
+			}(commands[i]);
+		}
 	};
 
 	var creator = new CommandCreator();
+	var result = creator.find(testCase, testCase2);
+	console.log(result);
 
 
 </script>
