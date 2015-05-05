@@ -8,34 +8,34 @@
 <script>
 
 var testCase = { 
-		x: 1, 
-		y: 3, 
-		name: "foo"
-	};
+	x: 1, 
+	y: 3, 
+	name: "foo"
+};
 var testCase2 = { 
-		id: 0
-	};
+	id: 0
+};
 
 
-	var CommandCapture = function(){
-		var commands = ["find", "findOne", "orderBy", "limit"];
+var CommandCapture = function(){
+	var commands = ["find", "findOne", "orderBy", "limit"];
 
-		for (var i = 0; i < commands.length; i++) {
-			this[commands[i]] = function(name){
+	for (var i = 0; i < commands.length; i++) {
+		this[commands[i]] = function(name){
 
-				return function(){
-					return {
-						name: name,
-						args: arguments
-					};
+			return function(){
+				return {
+					name: name,
+					args: arguments
 				};
-			}(commands[i]);
-		}
-	};
+			};
+		}(commands[i]);
+	}
+};
 
-	var creator = new CommandCapture();
-	var result = creator.find(testCase, testCase2);
-	console.log(result);
+var creator = new CommandCapture();
+var result = creator.find(testCase, testCase2);
+console.log(result);
 
 
 </script>
