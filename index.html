@@ -17,7 +17,7 @@ var testCase2 = {
 	};
 
 
-	var CommandCreator = function(){
+	var CommandCapture = function(){
 		var commands = ["find", "findOne", "orderBy", "limit"];
 
 		for (var i = 0; i < commands.length; i++) {
@@ -33,7 +33,7 @@ var testCase2 = {
 		}
 	};
 
-	var creator = new CommandCreator();
+	var creator = new CommandCapture();
 	var result = creator.find(testCase, testCase2);
 	console.log(result);
 
