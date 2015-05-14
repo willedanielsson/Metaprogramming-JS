@@ -6,7 +6,32 @@
 
 
 <script>
+// FIRST EXPERIMENT
+function calcFunctions() {
+    var operators = ['+', '-', '*', '/'];
+    var names = ['a', 's', 'm', 'd'];
+    var funcs = {};
+    for (var i = 0; i < operators.length; i++) {
+        for (var j = 0; j < operators.length; j++) {
+            for (var k = 0; k < operators.length; k++) {
+                var name = names[i] + names[j] + names[k],
+                    body = ['w', operators[i], 'x', operators[j], 'y', operators[k], 'z'];
+                funcs[name] = new Function('w', 'x', 'y', 'z',
+                                           'return ' + body.join(''));
+            }
+        }
+    }
+    return funcs;
+}
 
+console.log('First');
+
+calculator = calcFunctions();
+calculator.asa(2,3,4,5); // 2+3-4+5 = 6
+console.log(calculator.mm(2,2,2,2)); //2*2*2*2 = 16
+
+
+// SECOND EXPERIMENT
 var testCase = { 
 	x: 1, 
 	y: 3, 
@@ -17,7 +42,7 @@ var testCase2 = {
 };
 
 
-var CommandCapture = function(){
+function CommandCapture() {
 
 	this.captures = [];
 	var commands = ["find", "findOne", "orderBy", "limit"];
@@ -33,6 +58,7 @@ var CommandCapture = function(){
 	}
 };
 
+console.log("Second");
 var creator = new CommandCapture();
 var result = creator.find(testCase, testCase2).limit(1);
 console.log(result);
