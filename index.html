@@ -18,23 +18,23 @@ var testCase2 = {
 
 
 var CommandCapture = function(){
+
+	this.captures = [];
 	var commands = ["find", "findOne", "orderBy", "limit"];
 
 	for (var i = 0; i < commands.length; i++) {
 		this[commands[i]] = function(name){
 
 			return function(){
-				return {
-					name: name,
-					args: arguments
-				};
+				this.captures.push({ name: name, args: arguments});
+				return this;
 			};
 		}(commands[i]);
 	}
 };
 
 var creator = new CommandCapture();
-var result = creator.find(testCase, testCase2);
+var result = creator.find(testCase, testCase2).limit(1);
 console.log(result);
 
 
